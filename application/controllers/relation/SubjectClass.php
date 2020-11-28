@@ -18,7 +18,7 @@ class SubjectClass extends CI_Controller
     //@route    GET admin/subclass
     public function subclass()
     {
-        $data['classes'] = $this->BM->getALl("class");
+        $data['classes'] = $this->Subject->subclassTotal();
         $this->load->view('admin/subclass/subclass', $data);
     }
 

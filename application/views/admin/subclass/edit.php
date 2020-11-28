@@ -92,6 +92,7 @@
 
     let classId = '<?=$class->id?>';
     let smId = null;
+    let semesterName = null;
 
 	function setSemester(semesterName, smClass, smId) {
         $(".disableSub").removeClass("disableSub");
@@ -99,6 +100,7 @@
         $(".status-offline").removeClass("status-offline");
         $(".sm-active").removeClass("sm-active");
 		$("#semester").html(semesterName);
+        this.semesterName = semesterName;
         this.smId = smId;
         $(smClass).addClass("sm-active");
 
@@ -134,7 +136,7 @@
             if(response) {
                 swal("Sukses", response.message, "success");
                 loadContent(urlSublist, '.sublist');
-                setSemester(classId, `.sm-${this.smId}`, this.smId);
+                setSemester(this.semesterName, `.sm-${this.smId}`, this.smId);
             } else {
                 console.log("Error: ", err);
             }

@@ -1,10 +1,10 @@
 <ul class="breadcrumb">
 	<li>Relasi</li>
-	<li class="active">Kelas & Mapel</li>
+	<li class="active">Guru & Mapel</li>
 </ul>
 
 <div class="page-title">
-	<h2><span class="fa fa-book"></span> Kelas & Mapel</h2>
+	<h2><span class="fa fa-book"></span> Guru & Mapel</h2>
 </div>
 
 <div class="page-content-wrap">
@@ -12,7 +12,7 @@
 	<div class="row">
         <?php foreach ($classes as $class) { ?>
             <div class="col-md-3">
-                <a class="tile tile-default link-to" data-to="<?=base_url("admin/subclass/$class->id/edit")?>">
+                <a class="tile tile-default link-to" data-to="<?=base_url("admin/subteachers/$class->id/edit")?>">
                     <?=$class->classname?>
                     <p>Total Mata Pelajaran: <?=$class->total_subject?></p>
                     <div class="informer informer-primary">Kelas</div>

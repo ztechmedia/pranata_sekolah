@@ -14,7 +14,12 @@
             <tbody>
                 <?php foreach ($sublist as $key => $sub) { ?>
                     <tr>
-                        <td rowspan="<?=count($sub) + 1?>"><?=$key?></td>
+                        <td rowspan="<?=count($sub) + 1?>">
+                            <p style="
+                                font-weight: bold;
+                                font-size: 14px;
+                            "><?=$key?></p>
+                        </td>
                     </tr>
                     <?php foreach($sub as $list) { ?>
                         <tr>

@@ -104,3 +104,7 @@ $route['admin/subclass/(:num)/edit'] = 'relation/SubjectClass/edit/$1';
 $route['admin/subclass/(:num)/(:num)/check'] = 'relation/SubjectClass/checkClassSubjects/$1/$2';
 $route['admin/subclass/(:num)/sublist'] = 'relation/SubjectClass/subclassList/$1';
 $route['admin/subclass/add'] = 'relation/SubjectClass/addSubclass';
+
+/* subteachers routes */
+//@view
+$route['admin/subteachers'] = 'relation/SubjectTeacher/subteachers';

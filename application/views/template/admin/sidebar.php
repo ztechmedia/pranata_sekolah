@@ -40,6 +40,8 @@
     <ul>
         <li class="subclass"><a class="side-submenu" data-url="<?=base_url("admin/subclass")?>" data-menu=".relation"
                 data-submenu=".subclass"><span class="fa fa-circle"></span> Kelas & Mapel</a></li>
+        <li class="subteachers"><a class="side-submenu" data-url="<?=base_url("admin/subteachers")?>" data-menu=".relation"
+                data-submenu=".subteachers"><span class="fa fa-circle"></span> Guru & Mapel</a></li>
     </ul>
 </li>
 
