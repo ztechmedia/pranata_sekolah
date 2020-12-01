@@ -34,4 +34,20 @@ class SubjectModel extends CI_Model
                 ")
                 ->result();
     }
+
+    public function subclassTeacers($classId)
+    {
+        return $this->db
+                ->select("a.*, b.subject_name, c.classname, d.id AS semester_id, d.semester_name, f.name AS teacher_name")
+                ->from("subclass AS a")
+                ->join("subjects AS b", "a.subject_id = b.id", "left")
+                ->join("class AS c", "a.class_id = c.id", "left")
+                ->join("semesters AS d", "a.semester_id = d.id", "left")
+                ->join("subteachers AS e", "a.id = e.subclass_id", "left")
+                ->join("teachers AS f", "e.teacher_id = f.id", "left")
+                ->where("a.class_id", $classId)
+                ->order_by('d.semester_name', "asc")
+                ->get()
+                ->result();
+    }
 }

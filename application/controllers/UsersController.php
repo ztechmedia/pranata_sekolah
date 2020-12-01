@@ -117,7 +117,11 @@ class UsersController extends CI_Controller
     //@route    GET admin/users/:userId/delete
     public function delete($id)
     {
-        $this->BM->deleteById("users", $id);
-        appJson($id);
+        if($id == $this->auth->userId) {
+            appJson(["errors" => "Tidak dapat menghapus diri sendiri"]);
+        }else{
+            $this->BM->deleteById("users", $id);
+            appJson($id);
+        }
     }
 }

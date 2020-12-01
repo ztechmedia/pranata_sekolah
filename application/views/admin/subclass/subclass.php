@@ -28,7 +28,3 @@
 		margin-bottom: 10px;
 	}
 </style>
-
-<script>
-
-</script>

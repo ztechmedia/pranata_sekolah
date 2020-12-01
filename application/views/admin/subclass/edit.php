@@ -5,7 +5,7 @@
 </ul>
 
 <div class="page-title">
-	<h2><span class="fa fa-book"></span> Kelas <?=$class->classname?></h2>
+	<h2><span class="fa fa-arrow-circle-o-left link-to" data-to="<?=base_url("admin/subclass")?>"></span> Kelas <?=$class->classname?></h2>
 </div>
 
 <div class="page-content-wrap">
@@ -141,6 +141,33 @@
                 console.log("Error: ", err);
             }
         });
+    }
+
+    function deleteSubject(subId, subjectName) {
+        swal(
+            {
+                title: "Hapus",
+                text: `Anda yakin ingin menghapus mata pelajaran ${subjectName}`,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Ya, Hapus!",
+                closeOnConfirm: false,
+            },
+            function () {
+                const url = `${BASE_URL}admin/subclass/${subId}/delete`;
+                const urlSublist = `${BASE_URL}admin/subclass/${classId}/sublist`;
+                reqJson(url, "GET", {}, (err, response) => {
+                    if (response) {
+                        swal("Sukses", response.message, "success");
+                        loadContent(urlSublist, '.sublist');
+                        setSemester(this.semesterName, `.sm-${this.smId}`, this.smId);
+                    } else {
+                        console.log("Error: ", err);
+                    }
+                });
+            }
+        );
     }
 
 	setSemester('<?=$semesterName?>', '<?=$smClass?>','<?=$smId?>');

@@ -23,8 +23,13 @@
                     </tr>
                     <?php foreach($sub as $list) { ?>
                         <tr>
-                            <td><?=$list?></td>
-                        </tr>  
+                            <td>
+                                <?=$list['subject_name']?>
+                                <a style="color:red" onclick="deleteSubject('<?=$list['subject_id']?>', '<?=$list['subject_name']?>')">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
                     <?php } ?>
                 <?php } ?>
             </tbody>

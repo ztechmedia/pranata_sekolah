@@ -94,6 +94,13 @@ class SemesterController extends CI_Controller
     //@route    GET admin/semesters/:semesterId/delete
     public function delete($id)
     {
+        
+        $checkSub = $this->BM->getWhere("subclass", ['semester_id' => $id])->row();
+        if($checkSub) {
+            appJson([
+                "errors" => "Semester sudah digunakan dalam relasi Kelas & Mata Pelajaran"
+            ]);
+        }
         $this->BM->deleteById("semesters", $id);
         appJson($id);
     }

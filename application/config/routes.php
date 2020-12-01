@@ -103,8 +103,21 @@ $route['admin/subclass'] = 'relation/SubjectClass/subclass';
 $route['admin/subclass/(:num)/edit'] = 'relation/SubjectClass/edit/$1';
 $route['admin/subclass/(:num)/(:num)/check'] = 'relation/SubjectClass/checkClassSubjects/$1/$2';
 $route['admin/subclass/(:num)/sublist'] = 'relation/SubjectClass/subclassList/$1';
+//@action
 $route['admin/subclass/add'] = 'relation/SubjectClass/addSubclass';
+$route['admin/subclass/(:num)/delete'] = 'relation/SubjectClass/delete/$1';
 
 /* subteachers routes */
 //@view
 $route['admin/subteachers'] = 'relation/SubjectTeacher/subteachers';
+$route['admin/subteachers/(:num)/edit'] = 'relation/SubjectTeacher/edit/$1';
+$route['admin/subteachers/(:num)/(:num)/(:num)/check'] = 'relation/SubjectTeacher/checkClassSubjects/$1/$2/$3';
+$route['admin/subteachers/(:num)/sublist'] = 'relation/SubjectTeacher/subclassTeacers/$1';
+//@action
+$route['admin/subteachers/add'] = 'relation/SubjectTeacher/add/$1';
+
+/* values routes */
+//@view
+$route['admin/values'] = 'relation/SubjectValue/values';
+//@action
+$route['admin/values/student-search/(:any)'] = 'relation/SubjectValue/studentSearch/$1';

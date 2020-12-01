@@ -54,7 +54,10 @@ class SubjectClass extends CI_Controller
         $newSub = [];
         foreach ($sublist as $sub) {
             $sname = $sub->semester_name;
-            $newSub[$sname][] = $sub->subject_name;
+            $newSub[$sname][] = [
+                "subject_name" => $sub->subject_name,
+                "subject_id" => $sub->id
+            ];
         }
         $data['sublist'] = $newSub;
         $this->load->view("admin/subclass/sublist", $data);
@@ -76,6 +79,19 @@ class SubjectClass extends CI_Controller
             appJson([
                 "success" => true,
                 "message" => "Berhasil menambahkan mata pelajaran ke dalam Kelas"
+            ]);
+        }
+    }
+
+    //@desc     delete subclass
+    //@route    DELETE admin/subclass/:subId/delete
+    public function delete($subId)
+    {         
+        $delete = $this->BM->deleteById("subclass", $subId);
+        if($delete) {
+            appJson([
+                "success" => true,
+                "message" => "Berhasil menghapus pelajaran"
             ]);
         }
     }

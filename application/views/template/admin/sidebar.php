@@ -36,13 +36,19 @@
 </li>
 
 <li class="xn-openable relation">
-    <a><span class="fa fa-book"></span> <span class="xn-text">Relasi</span></a>
+    <a><span class="fa fa-random"></span> <span class="xn-text">Relasi</span></a>
     <ul>
         <li class="subclass"><a class="side-submenu" data-url="<?=base_url("admin/subclass")?>" data-menu=".relation"
                 data-submenu=".subclass"><span class="fa fa-circle"></span> Kelas & Mapel</a></li>
         <li class="subteachers"><a class="side-submenu" data-url="<?=base_url("admin/subteachers")?>" data-menu=".relation"
                 data-submenu=".subteachers"><span class="fa fa-circle"></span> Guru & Mapel</a></li>
     </ul>
+</li>
+
+
+<li class="value">
+    <a class="side-menu" data-url="<?=base_url("admin/values")?>" data-menu=".value"><span
+            class="fa fa-book"></span> <span class="xn-text">Nilai Siswa</span></a>
 </li>
 
 <li class="xn-openable settings">
