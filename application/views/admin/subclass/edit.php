@@ -5,7 +5,7 @@
 </ul>
 
 <div class="page-title">
-	<h2><span class="fa fa-arrow-circle-o-left link-to" data-to="<?=base_url("admin/subclass")?>"></span> Kelas <?=$class->classname?></h2>
+	<h2><span class="fa fa-arrow-circle-o-left link-to" data-to="<?=base_url("admin/subclass/$year")?>"></span> Kelas <?=$class->classname?></h2>
 </div>
 
 <div class="page-content-wrap">
@@ -15,6 +15,7 @@
 			<a class="tile tile-default">
 				<div id="semester"></div>
 				<p>Semester Aktif</p>
+                <div class="informer informer-primary">Tahun: <strong><?=$year?></strong></div>
 			</a>
 			<div class="panel panel-default">
 				<div class="panel-body list-group custom-scroll-sm">
@@ -58,10 +59,6 @@
 </div>
 
 <style>
-	.btnContainer {
-		margin-bottom: 10px;
-	}
-
     .sm-active {
         color: #175b35 !important;
         font-weight: bold;
@@ -91,6 +88,7 @@
     let BASE_URL = '<?=base_url()?>';
 
     let classId = '<?=$class->id?>';
+    let year = '<?=$year?>';
     let smId = null;
     let semesterName = null;
 
@@ -105,15 +103,17 @@
         $(smClass).addClass("sm-active");
 
         //@ check subjects for class & semester
-        const url = `${BASE_URL}admin/subclass/${classId}/${smId}/check`;
-        const urlSublist = `${BASE_URL}admin/subclass/${classId}/sublist`;
+        const url = `${BASE_URL}admin/subclass/${classId}/${smId}/${year}/check`;
+        const urlSublist = `${BASE_URL}admin/subclass/${classId}/${year}/sublist`;
         reqJson(url, "POST", {}, (err, response) => {
             if(response) {
-                response.subjects.map(subject => {
-                    $(`.subject-${subject.subject_id}`).addClass("disableSub");
-                    $(`.subject-status-${subject.subject_id}`).removeClass("status-online");
-                    $(`.subject-status-${subject.subject_id}`).addClass("status-offline");
-                });
+                if(response.subjects) {
+                    response.subjects.map(subject => {
+                        $(`.subject-${subject.subject_id}`).addClass("disableSub");
+                        $(`.subject-status-${subject.subject_id}`).removeClass("status-online");
+                        $(`.subject-status-${subject.subject_id}`).addClass("status-offline");
+                    });
+                }
                 loadContent(urlSublist, '.sublist');
             } else {
                 console.log("Error: ", err);
@@ -126,24 +126,25 @@
         const data = {
             classId: classId,
             smId: this.smId,
-            subId: subId
+            subId: subId,
+            year: year
         }
 
         const url = `${BASE_URL}admin/subclass/add`;
-        const urlSublist = `${BASE_URL}admin/subclass/${classId}/sublist`;
+        const urlSublist = `${BASE_URL}admin/subclass/${classId}/${year}/sublist`;
 
         reqJson(url, "POST", data, (err, response) => {
             if(response) {
-                swal("Sukses", response.message, "success");
-                loadContent(urlSublist, '.sublist');
                 setSemester(this.semesterName, `.sm-${this.smId}`, this.smId);
+                loadContent(urlSublist, '.sublist');
+                swal("Sukses", response.message, "success");
             } else {
                 console.log("Error: ", err);
             }
         });
     }
 
-    function deleteSubject(subId, subjectName) {
+    function deleteSubject(subId, subjectName, semesterName, smId) {
         swal(
             {
                 title: "Hapus",
@@ -156,12 +157,12 @@
             },
             function () {
                 const url = `${BASE_URL}admin/subclass/${subId}/delete`;
-                const urlSublist = `${BASE_URL}admin/subclass/${classId}/sublist`;
+                const urlSublist = `${BASE_URL}admin/subclass/${classId}/${year}/sublist`;
                 reqJson(url, "GET", {}, (err, response) => {
                     if (response) {
-                        swal("Sukses", response.message, "success");
+                        setSemester(semesterName, `.sm-${smId}`, smId);
                         loadContent(urlSublist, '.sublist');
-                        setSemester(this.semesterName, `.sm-${this.smId}`, this.smId);
+                        swal("Sukses", response.message, "success");
                     } else {
                         console.log("Error: ", err);
                     }

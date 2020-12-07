@@ -39,6 +39,16 @@ $(document.body).on("click", ".link-to", function (e) {
   target ? loadContent(to, target) : loadContent(to, ".content");
 });
 
+$(document.body).on("click", ".link-to-unsave", function (e) {
+  e.preventDefault();
+  const element = $(this);
+  const to = element.data("to");
+  const target = element.data("target");
+
+  target ? setContentLoader(target) : setContentLoader();
+  target ? loadContent(to, target) : loadContent(to, ".content");
+});
+
 $(document.body).on("click", ".link-to-with-prev", function (e) {
   e.preventDefault();
   const element = $(this);

@@ -16,30 +16,33 @@ class SubjectTeacher extends CI_Controller
 
     //@desc     show subteachers table
     //@route    GET admin/subteachers
-    public function subteachers()
+    public function subteachers($year)
     {
-        $data['classes'] = $this->Subject->subclassTotal();
+        $data['classes'] = $this->Subject->subclassTotal($year);
+        $data['year'] = $year;
         $this->load->view('admin/subteachers/subteachers', $data);
     }
 
     //@desc     edit subteachers table
     //@route    GET admin/subteachers/:classId/edit
-    public function edit($id)
+    public function edit($id, $year)
     {     
         $data['class'] = $this->BM->getById("class", $id);
         $data['teachers'] = $this->BM->getAll("teachers");
+        $data['year'] = $year;
         $this->load->view('admin/subteachers/edit', $data);
     }
 
     //@desc     check class & semester subjects
-    //@route    GET admin/subteachers/:classId/:semesterId/:subjectId/edit
-    public function checkClassSubjects($classId, $smId, $subjectId)
+    //@route    GET admin/subteachers/:classId/:semesterId/:subjectId/:year/edit
+    public function checkClassSubjects($classId, $smId, $subjectId, $year)
     {   
         $subId = $this->BM->getWhere("subclass", 
             [
                 'class_id' => $classId, 
                 'semester_id' => $smId,
-                'subject_id' => $subjectId
+                'subject_id' => $subjectId,
+                'year' => $year
             ]
         )->row()->id;
         $subteacher = $this->BM->getWhere("subteachers", ['subclass_id' => $subId])->row()->teacher_id;  
@@ -49,10 +52,10 @@ class SubjectTeacher extends CI_Controller
     }
 
     //@desc     list class & semester subjects
-    //@route    GET admin/subteachers/:classId/sublist
-    public function subclassTeacers($classId)
+    //@route    GET admin/subteachers/:classId/:year/sublist
+    public function subclassTeacers($classId, $year)
     {   
-        $sublist = $this->Subject->subclassTeacers($classId);
+        $sublist = $this->Subject->subclassTeacers($classId, $year);
         $newSub = [];
         foreach ($sublist as $sub) {
             $newSub[$sub->semester_name][] = [
@@ -76,9 +79,9 @@ class SubjectTeacher extends CI_Controller
             "subclass_id" => $obj->subclass_id,
             "teacher_id" => $obj->teacher_id
         ];
-        $exist = $this->BM->getWhere("subteachers", ["subclass_id" => $obj->subclass_id])->row()->id;
-        $teacher = $exist > 0
-            ? $this->BM->updateById("subteachers", $exist, $data)
+        $exist = $this->BM->getWhere("subteachers", ["subclass_id" => $obj->subclass_id])->row();
+        $teacher = $exist
+            ? $this->BM->updateById("subteachers", $exist->id, $data)
             : $this->BM->create("subteachers", $data);
         if($teacher) {
             appJson([

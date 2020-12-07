@@ -19,7 +19,7 @@
                 <form id="validate" role="form" class="form-horizontal action-submit-create"
                     data-action="<?=base_url("admin/class/add")?>">
                     <div class="panel-body">
-                        <?php $data['semester'] = null; $this->load->view('admin/classes/form', $data)?>
+                        <?php $data['class'] = null; $this->load->view('admin/classes/form', $data)?>
                     </div>
                     <div class="panel-footer">
                         <div class="btn-group pull-right">

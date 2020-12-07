@@ -5,7 +5,7 @@
 </ul>
 
 <div class="page-title">
-	<h2><span class="fa fa-arrow-circle-o-left link-to" data-to="<?=base_url("admin/subteachers")?>"></span> Kelas <?=$class->classname?></h2>
+	<h2><span class="fa fa-arrow-circle-o-left link-to" data-to="<?=base_url("admin/subteachers/$year")?>"></span> Kelas <?=$class->classname?></h2>
 </div>
 
 <div class="page-content-wrap">
@@ -14,6 +14,7 @@
 			<a class="tile tile-default">
 				<div id="subject-name">Mata Pelajaran: ...</div>
 				<p id="semester-name">Semester ...</p>
+                <div class="informer informer-primary">Tahun: <strong><?=$year?></strong></div>
 			</a>
         </div>
     </div>
@@ -69,13 +70,14 @@
 <script>
     let BASE_URL = '<?=base_url()?>';
     let classId = '<?=$class->id?>';
+    let year = '<?=$year?>';
     let subjectName = null;
     let semester = null;
     let smId = null;
     let subject = null;
     let subclass = null;
 
-    loadContent(`${BASE_URL}admin/subteachers/${classId}/sublist`, '.sublist');
+    loadContent(`${BASE_URL}admin/subteachers/${classId}/${year}/sublist`, '.sublist');
     
     function setSubject(subjectName, semester, smId, subject, subclass) {
         this.subjectName = subjectName;
@@ -89,7 +91,7 @@
         $(".status-offline").removeClass("status-offline");
         $("#subject-name").html("Mata Pelajaran: " + subjectName);
         $("#semester-name").html(semester);
-        reqJson(`${BASE_URL}admin/subteachers/${classId}/${smId}/${subject}/check`, 
+        reqJson(`${BASE_URL}admin/subteachers/${classId}/${smId}/${subject}/${year}/check`, 
                     "POST", {}, (err, response) => {
             if(response) {
                 $(`.subject-${response.teacherId}`).addClass("disableSub");
@@ -120,7 +122,7 @@
                     this.semester,
                     this.smId,
                     this.subject);
-                loadContent(`${BASE_URL}admin/subteachers/${classId}/sublist`, '.sublist');
+                loadContent(`${BASE_URL}admin/subteachers/${classId}/${year}/sublist`, '.sublist');
             } else {
                 console.log("Error: ", err);
             }

@@ -25,7 +25,13 @@
                         <tr>
                             <td>
                                 <?=$list['subject_name']?>
-                                <a style="color:red" onclick="deleteSubject('<?=$list['subject_id']?>', '<?=$list['subject_name']?>')">
+                                <a style="color:red" 
+                                    onclick="deleteSubject(
+                                                '<?=$list['subject_id']?>',
+                                                '<?=$list['subject_name']?>',
+                                                '<?=$list['semester_name']?>',
+                                                '<?=$list['semester_id']?>'
+                                            )">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>

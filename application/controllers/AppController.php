@@ -11,7 +11,8 @@ class AppController extends CI_Controller {
 
 	public function index()
 	{
-        $this->load->view('template/admin/app');
+        $data["currentYear"] = date("Y");
+        $this->load->view('template/admin/app', $data);
     }
     
     public function pageNotFound()

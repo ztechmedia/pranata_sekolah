@@ -16,15 +16,16 @@ class SubjectClass extends CI_Controller
 
     //@desc     show subclass table
     //@route    GET admin/subclass
-    public function subclass()
+    public function subclass($year)
     {
-        $data['classes'] = $this->Subject->subclassTotal();
+        $data['classes'] = $this->Subject->subclassTotal($year);
+        $data['year'] = $year;
         $this->load->view('admin/subclass/subclass', $data);
     }
 
     //@desc     edit subclass table
     //@route    GET admin/subclass/:classId/edit
-    public function edit($id)
+    public function edit($id, $year)
     {
         $semester = $this->BM->getFirst("semesters");
         $data['semesterName'] = $semester->semester_name;
@@ -33,30 +34,40 @@ class SubjectClass extends CI_Controller
         $data['semesters'] = $this->BM->getALl("semesters");
         $data['subjects'] = $this->BM->getAll("subjects");
         $data['class'] = $this->BM->getById("class", $id);
+        $data['year'] = $year;
         $this->load->view('admin/subclass/edit', $data);
     }
 
     //@desc     check class & semester subjects
-    //@route    GET admin/subclass/:classId/:semesterId/edit
-    public function checkClassSubjects($classId, $smId)
+    //@route    GET admin/subclass/:classId/:semesterId/:year/edit
+    public function checkClassSubjects($classId, $smId, $year)
     {   
-        $subjects = $this->BM->getWhere("subclass", ['class_id' => $classId, 'semester_id' => $smId])->result();
+        $subjects = $this->BM->getWhere(
+                        "subclass", 
+                        [
+                            'class_id' => $classId,
+                            'semester_id' => $smId,
+                            'year' => $year
+                        ]
+                    )->result();
         appJson([
             "subjects" => $subjects
         ]);
     }
 
     //@desc     list class & semester subjects
-    //@route    GET admin/subclass/:classId/sublist
-    public function subclassList($classId)
+    //@route    GET admin/subclass/:classId/:year/sublist
+    public function subclassList($classId, $year)
     {   
-        $sublist = $this->Subject->subclassList($classId);
+        $sublist = $this->Subject->subclassList($classId, $year);
         $newSub = [];
         foreach ($sublist as $sub) {
             $sname = $sub->semester_name;
             $newSub[$sname][] = [
                 "subject_name" => $sub->subject_name,
-                "subject_id" => $sub->id
+                "subject_id" => $sub->id,
+                "semester_name" => $sname,
+                "semester_id" => $sub->semester_id
             ];
         }
         $data['sublist'] = $newSub;
@@ -71,7 +82,9 @@ class SubjectClass extends CI_Controller
         $data = [
             "class_id" => $obj->classId,
             "semester_id" => $obj->smId,
-            "subject_id" => $obj->subId
+            "subject_id" => $obj->subId,
+            "year" => $obj->year
+            
         ];
         
         $subclass = $this->BM->create("subclass", $data);

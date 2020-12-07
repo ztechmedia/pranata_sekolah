@@ -56,7 +56,7 @@
     <div class="content-frame-body content-frame-body-left">
         <div class="row">
             <div class="col-md-12">
-               
+               <div class="student-area"></div>
             </div>
         </div>
     </div>
@@ -71,8 +71,30 @@
 <script>
     const BASE_URL = '<?=base_url()?>';
 
+    let currentStudent = localStorage.getItem("student-classlist-url");
+    console.log(currentStudent);
+    if(currentStudent.length > 0) {
+        loadContent(currentStudent, ".student-area");
+    }
+
     function searchStudent(student) {
-        const url = `${BASE_URL}admin/values/student-search/`+student;
-        loadContent(encodeURI(url), ".student-list");
+        const url = `${BASE_URL}admin/values/student-search`;
+        const data = {
+            student: student
+        }
+
+        reqJson(url, "POST", data, (err, response) => {
+            if(response) {
+                $(".student-list").html(response.responseText);
+            } else {
+                console.log("Error: ", err);
+            }
+        });
+    }
+
+    function setStudent(studentId) {
+        const url = `${BASE_URL}admin/values/${studentId}/classlist`;
+        loadContent(url, ".student-area");
+        localStorage.setItem("student-classlist-url", url);
     }
 </script>
