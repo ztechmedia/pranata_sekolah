@@ -123,3 +123,5 @@ $route['admin/values'] = 'relation/SubjectValue/values';
 $route['admin/values/student-search'] = 'relation/SubjectValue/studentSearch';
 $route['admin/values/(:num)/classlist'] = 'relation/SubjectValue/studentClasslist/$1';
 $route['admin/values/(:num)/(:num)/setvalues'] = 'relation/SubjectValue/setValues/$1/$2';
+$route['admin/values/(:num)/(:num)/subclass'] = 'relation/SubjectValue/subclass/$1/$2';
+$route['admin/values/(:num)/add'] = 'relation/SubjectValue/add/$1';

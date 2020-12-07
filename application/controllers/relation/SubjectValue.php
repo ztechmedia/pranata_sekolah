@@ -8,6 +8,7 @@ class SubjectValue extends CI_Controller
         parent::__construct();
         $this->load->model("BaseModel", "BM");
         $this->load->model("ValueModel", "Value");
+        $this->load->model("SubjectModel", "Subject");
         $this->load->library('Datatables', 'datatables');
         $this->load->library("form_validation");
         $this->load->helper("utility");
@@ -39,5 +40,49 @@ class SubjectValue extends CI_Controller
         $data['classId'] = $classId;
         $data['year'] = date("Y");
         $this->load->view("admin/values/setvalues", $data);
+    }
+
+    public function subclass($classId, $year)
+    {
+        $sublist = $this->Value->subclassList($classId, $year);
+        $newSub = [];
+        foreach ($sublist as $sub) {
+            $sname = $sub->semester_name;
+            $newSub[$sname][] = [
+                "id" => $sub->id,
+                "subject_name" => $sub->subject_name,
+                "task" => $sub->task ? $sub->task : 0,
+                "midtest" => $sub->midtest ? $sub->midtest : 0,
+                'endtest' => $sub->endtest ? $sub->endtest : 0
+            ];
+        }
+        $data['sublist'] = $newSub;
+        
+        $this->load->view("admin/values/subclass", $data);
+    }
+
+    public function add($studentId)
+    {
+        $post = getPost();
+        $subclass = $post['subclass_id'];
+        $task = $post['task'];
+        $midtest = $post['midtest'];
+        $endtest = $post['endtest'];
+        foreach ($subclass as $id) {
+            $data[] = [
+                "subclass_id" => $id,
+                "student_id" => $studentId,
+                "task" => $task[$id][0],
+                "midtest" => $midtest[$id][0],
+                "endtest" => $endtest[$id][0],
+            ];
+        }
+
+        $create = $this->BM->createMultiple("student_values", $data);
+        if($create) {
+            appJson([
+                "message" => "Berhasil menyimpan nilai siswa"
+            ]);
+        }
     }
 }

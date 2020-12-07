@@ -31,4 +31,16 @@ class ValueModel extends CI_Model
                 ->get()
                 ->row();
     }
+
+    public function subclassList($classId, $year)
+    {
+        return $this->db->query("
+            SELECT a.id, b.task, b.midtest, b.endtest, c.semester_name, d.subject_name 
+                FROM subclass AS a 
+                LEFT JOIN student_values AS b ON a.id = b.subclass_id 
+                LEFT JOIN semesters AS c ON a.semester_id = c.id 
+                LEFT JOIN subjects AS d ON a.subject_id = d.id 
+                WHERE a.class_id = '$classId' AND a.year = '$year'
+        ")->result();
+    }
 }

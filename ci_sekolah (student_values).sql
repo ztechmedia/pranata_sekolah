@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3-dev
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 07, 2020 at 03:20 PM
--- Server version: 8.0.22
--- PHP Version: 7.4.12
+-- Host: 127.0.0.1
+-- Generation Time: Dec 07, 2020 at 09:21 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `class` (
-  `id` int NOT NULL,
-  `classname` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `classname` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -52,10 +52,10 @@ INSERT INTO `class` (`id`, `classname`, `created_at`) VALUES
 --
 
 CREATE TABLE `roles` (
-  `id` int NOT NULL,
-  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `display_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `display_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -74,9 +74,9 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`) VALUES
 --
 
 CREATE TABLE `semesters` (
-  `id` int NOT NULL,
-  `semester_name` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `semester_name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -94,20 +94,20 @@ INSERT INTO `semesters` (`id`, `semester_name`, `created_at`) VALUES
 --
 
 CREATE TABLE `students` (
-  `id` int NOT NULL,
-  `nis` int NOT NULL,
-  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `birth_place` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `nis` int(11) NOT NULL,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `birth_place` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `birth_date` date NOT NULL,
-  `gender` enum('Laki - Laki','Perempuan') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(14) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `major` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `class_id` int NOT NULL,
-  `semester_id` int NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `gender` enum('Laki - Laki','Perempuan') COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `major` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `class_id` int(11) NOT NULL,
+  `semester_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -121,16 +121,40 @@ INSERT INTO `students` (`id`, `nis`, `name`, `birth_place`, `birth_date`, `gende
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student_values`
+--
+
+CREATE TABLE `student_values` (
+  `id` int(10) NOT NULL,
+  `student_id` int(10) NOT NULL,
+  `subclass_id` int(10) NOT NULL,
+  `task` int(3) NOT NULL,
+  `midtest` int(3) NOT NULL,
+  `endtest` int(3) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student_values`
+--
+
+INSERT INTO `student_values` (`id`, `student_id`, `subclass_id`, `task`, `midtest`, `endtest`, `created_at`) VALUES
+(13, 7, 137, 80, 80, 80, '2020-12-07 20:20:46'),
+(14, 7, 138, 80, 80, 80, '2020-12-07 20:20:46');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subclass`
 --
 
 CREATE TABLE `subclass` (
-  `id` int NOT NULL,
-  `class_id` int NOT NULL,
-  `semester_id` int NOT NULL,
-  `subject_id` int NOT NULL,
-  `year` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `semester_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -155,9 +179,9 @@ INSERT INTO `subclass` (`id`, `class_id`, `semester_id`, `subject_id`, `year`, `
 --
 
 CREATE TABLE `subjects` (
-  `id` int NOT NULL,
-  `subject_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `subject_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -183,19 +207,11 @@ INSERT INTO `subjects` (`id`, `subject_name`, `created_at`) VALUES
 --
 
 CREATE TABLE `subteachers` (
-  `id` int NOT NULL,
-  `subclass_id` int NOT NULL,
-  `teacher_id` int NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `subteachers`
---
-
-INSERT INTO `subteachers` (`id`, `subclass_id`, `teacher_id`, `created_at`) VALUES
-(34, 137, 6, '2020-12-06 14:41:26'),
-(35, 138, 6, '2020-12-06 14:43:08');
+  `id` int(11) NOT NULL,
+  `subclass_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -204,21 +220,21 @@ INSERT INTO `subteachers` (`id`, `subclass_id`, `teacher_id`, `created_at`) VALU
 --
 
 CREATE TABLE `teachers` (
-  `id` int NOT NULL,
-  `nip` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `birth_place` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `nip` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `birth_place` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `birth_date` date NOT NULL,
-  `gender` enum('Laki - Laki','Perempuan') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(14) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `education` enum('S1','S2','S3') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `major` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `status` enum('Lajang','Menikah') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `work_status` enum('PNS','Honorer') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `gender` enum('Laki - Laki','Perempuan') COLLATE utf8_unicode_ci NOT NULL,
+  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `education` enum('S1','S2','S3') COLLATE utf8_unicode_ci NOT NULL,
+  `major` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `status` enum('Lajang','Menikah') COLLATE utf8_unicode_ci NOT NULL,
+  `work_status` enum('PNS','Honorer') COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -237,15 +253,15 @@ INSERT INTO `teachers` (`id`, `nip`, `name`, `birth_place`, `birth_date`, `gende
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
-  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(65) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `role` int NOT NULL,
-  `token` varchar(62) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `token_password` varchar(62) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(65) COLLATE utf8_unicode_ci NOT NULL,
+  `role` int(11) NOT NULL,
+  `token` varchar(62) COLLATE utf8_unicode_ci NOT NULL,
+  `token_password` varchar(62) COLLATE utf8_unicode_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -292,6 +308,14 @@ ALTER TABLE `students`
   ADD KEY `semester_id` (`semester_id`);
 
 --
+-- Indexes for table `student_values`
+--
+ALTER TABLE `student_values`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subclass_id` (`subclass_id`),
+  ADD KEY `student_id` (`student_id`);
+
+--
 -- Indexes for table `subclass`
 --
 ALTER TABLE `subclass`
@@ -310,8 +334,7 @@ ALTER TABLE `subjects`
 -- Indexes for table `subteachers`
 --
 ALTER TABLE `subteachers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `subclass_id` (`subclass_id`) USING BTREE,
+  ADD KEY `subclass_id` (`subclass_id`,`teacher_id`),
   ADD KEY `teacher_id` (`teacher_id`);
 
 --
@@ -336,55 +359,55 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `semesters`
 --
 ALTER TABLE `semesters`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `student_values`
+--
+ALTER TABLE `student_values`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `subclass`
 --
 ALTER TABLE `subclass`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `subteachers`
---
-ALTER TABLE `subteachers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -399,6 +422,13 @@ ALTER TABLE `students`
   ADD CONSTRAINT `students_ibfk_3` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `student_values`
+--
+ALTER TABLE `student_values`
+  ADD CONSTRAINT `student_values_ibfk_1` FOREIGN KEY (`subclass_id`) REFERENCES `subclass` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_values_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `subclass`
 --
 ALTER TABLE `subclass`
@@ -410,8 +440,8 @@ ALTER TABLE `subclass`
 -- Constraints for table `subteachers`
 --
 ALTER TABLE `subteachers`
-  ADD CONSTRAINT `subteachers_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `subteachers_ibfk_2` FOREIGN KEY (`subclass_id`) REFERENCES `subclass` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `subteachers_ibfk_1` FOREIGN KEY (`subclass_id`) REFERENCES `subclass` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `subteachers_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teachers`
