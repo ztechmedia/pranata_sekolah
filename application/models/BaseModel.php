@@ -89,6 +89,23 @@ class BaseModel extends CI_Model
         return $this->db->delete($table, $where);
     }
 
+    public function deleteMultipleColumn($table, $single, $array)
+    {
+        if(count($single) > 0) {
+            foreach($single as $skey => $sval){
+                $this->db->where($skey, $sval);
+            }
+        }
+        
+        if(count($array) > 0) {
+            foreach ($array as $akey => $aval) {
+                $this->db->where_in($akey, $aval);
+            }
+        }
+
+        return $this->db->delete($table);
+    }
+
     public function checkById($table, $id)
     {
         $query = $this->db->get_where($table, ['id' => $id])->result();

@@ -42,28 +42,63 @@ class SubjectValue extends CI_Controller
         $this->load->view("admin/values/setvalues", $data);
     }
 
-    public function subclass($classId, $year)
+    public function subclass($classId, $year, $studentId)
     {
-        $sublist = $this->Value->subclassList($classId, $year);
+        $sublist = $this->Value->subclassListExist($classId, $year, $studentId);
+        $action = "update";
+        if(count($sublist) == 0) {
+            $sublist = $this->Value->subclassList($classId, $year);
+            $action = "add";
+        }
         $newSub = [];
+        $subclassId = [];
+        $subFilter = [];
+
+        if($this->auth->role == "teacher") {
+            $teacherId = $this->BM->getWhere("teachers", ['user_id' => $this->auth->userId])->row()->id;
+            $subteachers = $this->BM->getWhere("subteachers", ["teacher_id" => $teacherId])->result();
+            foreach ($subteachers as $subteacher) {
+                array_push($subFilter, $subteacher->subclass_id);
+            }
+        }
+
         foreach ($sublist as $sub) {
             $sname = $sub->semester_name;
+            array_push($subclassId, $sub->id);
+            $status = false;
+            if(count($subFilter) > 0) {
+                $status = in_array($sub->id, $subFilter) ? false : true;
+            }
             $newSub[$sname][] = [
                 "id" => $sub->id,
                 "subject_name" => $sub->subject_name,
-                "task" => $sub->task ? $sub->task : 0,
-                "midtest" => $sub->midtest ? $sub->midtest : 0,
-                'endtest' => $sub->endtest ? $sub->endtest : 0
+                "status" => $status,
+                "task" => isset($sub->task) ? $sub->task : 0,
+                "midtest" => isset($sub->midtest) ? $sub->midtest : 0,
+                'endtest' => isset($sub->endtest) ? $sub->endtest : 0
             ];
         }
         $data['sublist'] = $newSub;
-        
+        $data['action'] = $action;
+        $data['studentId'] = $studentId;
+        $data['subclassId'] = $subclassId;
         $this->load->view("admin/values/subclass", $data);
     }
 
     public function add($studentId)
     {
         $post = getPost();
+        $this->action($studentId, $post, "add");
+    }
+
+    public function update($studentId)
+    {
+        $post = getPost();
+        $this->action($studentId, $post, "update");
+    }
+
+    public function action($studentId, $post, $action)
+    {
         $subclass = $post['subclass_id'];
         $task = $post['task'];
         $midtest = $post['midtest'];
@@ -78,10 +113,29 @@ class SubjectValue extends CI_Controller
             ];
         }
 
-        $create = $this->BM->createMultiple("student_values", $data);
-        if($create) {
+        $save = $action == "add"
+            ? $this->BM->createMultiple("student_values", $data)
+            : $this->BM->updateMultiple("student_values", $data, "subclass_id");
+        if($save || $save == 0) {
             appJson([
                 "message" => "Berhasil menyimpan nilai siswa"
+            ]);
+        }
+    }
+
+    public function delete()
+    {
+        $obj = fileGetContent();
+        $delete = $this->BM->deleteMultipleColumn('student_values',
+            [
+                "student_id" => $obj->studentId
+            ],
+            [
+                "subclass_id" => $obj->subclassId
+            ]);
+        if($delete) {
+            appJson([
+                "message" => "Reset nilai berhasil"
             ]);
         }
     }

@@ -19,6 +19,7 @@
         <?php $this->load->view($view)?>
         <script type="text/javascript" src="<?=base_url("assets/joli/js/jquery/jquery.min.js")?>"></script>
         <script type="text/javascript" src="<?=base_url("assets/sweetalert/sweetalert.min.js")?>"></script>
+        <script type="text/javascript" src="<?=base_url("assets/custom/js/actions/errorHandler.js")?>"></script>
         <script type="text/javascript" src="<?=base_url("assets/custom/js/ajax/ajaxRequest.js")?>"></script>
         <script type="text/javascript" src="<?=base_url("assets/custom/js/actions/authActions.js")?>"></script>
     </body>

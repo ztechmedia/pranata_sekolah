@@ -1,3 +1,9 @@
+<div class="page-title">
+	<h2><span class="fa fa-arrow-circle-o-left link-to" 
+		data-target=".student-area" 
+		data-to="<?=base_url("admin/values/$student->id/classlist")?>"></span></h2>
+</div>
+
 <div class="row" style="margin-bottom: 10px">
 	<div class="page-content-wrap">
 		<div class="panel panel-default">
@@ -43,50 +49,21 @@
 <div class="row">
 	<div class="page-content-wrap">
 		<div class="panel panel-default">
-			<form id="save-values" data-url="<?=base_url("admin/values/$student->id/add")?>">
-				<div class="subclassList"></div>
-				<div class="btn-container">
-					<button type="submit" id="save" class="btn btn-primary">Simpan</button>
-				</div>
-			</form>
+			<div class="subclassList"></div>
 		</div>
 	</div>
 </div>
 
-<style>
-	.btn-container {
-		padding: 20px;
-	}
-</style>
-
 <script>
 	const BASE_URL = '<?=base_url()?>';
 	let classId = '<?=$classId?>';
+	let studentId = '<?=$student->id?>';
 
     function getSubclass() {
 		const year = $("#year").val();
-		const url = `${BASE_URL}admin/values/${classId}/${year}/subclass`;
+		const url = `${BASE_URL}admin/values/${classId}/${year}/${studentId}/subclass`;
 		loadContent(url, ".subclassList");
 	}
-
-	$("#save-values").on("submit", function(e) {
-		e.preventDefault();
-
-		$("#save").html("Loading...");
-		const el = $(this);
-		const url = el.data("url");
-		const data = new FormData(this);
-		
-		reqFormData(url, "POST", data, (err, response) => {
-			if(response) {
-				swal("Sukses", response.message, "success");
-				getSubclass();
-				$("#save").html("Simpan");
-			} else {
-				console.log("Error: ", err);
-			}
-		});
-	});
 
 	getSubclass();
 </script>

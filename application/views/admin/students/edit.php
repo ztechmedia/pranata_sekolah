@@ -23,11 +23,13 @@
                     <div class="panel-body">
                         <?php $data['student'] = $student; $this->load->view('admin/students/form', $data)?>
                     </div>
+                    <?php if($this->auth->role == "admin") {?>
                     <div class="panel-footer">
                         <div class="btn-group pull-right">
                             <button class="btn btn-primary save" type="submit">Update</button>
                         </div>
                     </div>
+                    <?php } ?>
                 </form>
             </div>
         </div>

@@ -121,4 +121,11 @@
 <script>
     $("#birth_date").datepicker();
     $("input.mask_phone").mask("9999-9999-9999");
+
+    let role = '<?=$this->auth->role?>';
+   
+    if(role != "admin") {
+        $(".form-control").attr("disabled", "disabled");
+        $(".form-control").attr("style", "color:#000");
+    }
 </script>
