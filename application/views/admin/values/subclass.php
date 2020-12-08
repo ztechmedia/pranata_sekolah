@@ -50,7 +50,7 @@
 
     <div class="btn-container">
         <button type="submit" id="save" class="btn btn-primary"><?=$action == "add" ? "Simpan" : "Update" ?></button>
-        <?php if($action == "update") {?>
+        <?php if($action == "update" && $this->auth->role == "admin") {?>
             <button type="button" id="delete" class="btn btn-danger">Reset</button>
         <?php } ?>
     </div>
