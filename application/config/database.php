@@ -7,8 +7,8 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => ENVIRONMENT !== 'production' ? 'arman' : 'nett2727_chics',
-	'password' => ENVIRONMENT !== 'production' ? 'secret' : 'januari1993',
+	'username' => ENVIRONMENT !== 'production' ? 'root' : 'nett2727_chics',
+	'password' => ENVIRONMENT !== 'production' ? '' : 'januari1993',
 	'database' => ENVIRONMENT !== 'production' ? 'ci_sekolah' : 'nett2727_chics',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

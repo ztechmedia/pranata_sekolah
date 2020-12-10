@@ -5,6 +5,9 @@ $route['default_controller'] = 'AppController';
 $route['404_override'] = 'AppController/pageNotFound';
 $route['translate_uri_dashes'] = false;
 
+//web routes
+$route['home'] = 'web/WebController/home';
+
 //admin routes
 $route['admin'] = 'AppController';
 
