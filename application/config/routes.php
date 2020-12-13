@@ -8,6 +8,19 @@ $route['translate_uri_dashes'] = false;
 //web routes
 $route['home'] = 'web/WebController/home';
 
+//school management
+$route['admin/vimission'] = 'master/SchoolController/vimission';
+$route['admin/vimission/update'] = 'master/SchoolController/updateVimission';
+$route['admin/agenda'] = 'master/SchoolController/agenda';
+$route['admin/agenda-table'] = 'master/SchoolController/agendaTable';
+$route['admin/agenda/create'] = 'master/SchoolController/create';
+$route['admin/agenda/(:num)/edit'] = 'master/SchoolController/edit/$1';
+$route['admin/agenda/(:num)/update'] = 'master/SchoolController/update/$1';
+$route['admin/agenda/tinyupload'] = 'master/SchoolController/tinyUpload';
+$route['admin/agenda/add'] = 'master/SchoolController/add';
+$route['admin/history'] = 'master/SchoolController/history';
+$route['admin/history/update'] = 'master/SchoolController/historyUpdate';
+
 //admin routes
 $route['admin'] = 'AppController';
 

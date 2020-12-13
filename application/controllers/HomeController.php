@@ -15,6 +15,10 @@ class HomeController extends CI_Controller {
     //@route    GET admin/dashboard
 	public function dashboard()
 	{
-        $this->load->view('admin/dashboard/dashboard');
+        $data['students'] = $this->BM->getTotalData("students");
+        $data['teachers'] = $this->BM->getTotalData("teachers");
+        $data['subjects'] = $this->BM->getTotalData("subjects");
+        $data['class'] = $this->BM->getTotalData("class");
+        $this->load->view('admin/dashboard/dashboard', $data);
     }
 }

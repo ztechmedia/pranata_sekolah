@@ -11,7 +11,7 @@
             <!-- START X-NAVIGATION -->
             <ul class="x-navigation nav-customx">
                 <li class="xn-logo">
-                    <a>Nama Sekolah</a>
+                    <a style="font-size: 23px;">SDN CIMUNING 1</a>
                     <a class="x-navigation-control">
                     </a>
                 </li>
@@ -78,7 +78,7 @@
     <script type="text/javascript" src="<?=base_url("assets/custom/js/actions/authActions.js")?>"></script>
     <script type="text/javascript" src="<?=base_url("assets/custom/js/actions/formActions.js")?>"></script>
     <script type="text/javascript" src="<?=base_url("assets/custom/js/highcharts.js")?>"></script>
-
+    
     <script>
         setSidebarOnLoad();
         setCurrentNav("<?=base_url("dashboard")?>");

@@ -56,6 +56,21 @@
             class="fa fa-book"></span> <span class="xn-text">Nilai Siswa</span></a>
 </li>
 
+<?php if($this->auth->role == "admin") { ?>
+<li class="xn-openable manage_school">
+    <a><span class="fa fa-globe"></span> <span class="xn-text">Manajemen Website</span></a>
+    <ul>
+        <li class="history"><a class="side-submenu" data-url="<?=base_url("admin/history")?>" data-menu=".manage_school"
+                data-submenu=".history"><span class="fa fa-circle"></span> Sejarah</a></li>
+        <li class="vimission"><a class="side-submenu" data-url="<?=base_url("admin/vimission")?>" data-menu=".manage_school"
+                data-submenu=".vimission"><span class="fa fa-circle"></span> Visi & Misi</a></li>
+
+        <li class="agenda"><a class="side-submenu" data-url="<?=base_url("admin/agenda")?>" data-menu=".manage_school"
+                data-submenu=".agenda"><span class="fa fa-circle"></span> Agenda Sekolah</a></li>
+    </ul>
+</li>
+<?php } ?>
+
 <?php if($this->auth->role == "admin") {?>
 <li class="xn-openable settings">
     <a><span class="fa fa-gear"></span> <span class="xn-text">Pengaturan</span></a>

@@ -21,7 +21,7 @@ class Auth
     public function logged()
     {
         if (!$this->ci->session->userdata(SESSION_KEY)) {
-            redirect("login");
+            redirect("home");
         }
     }
 

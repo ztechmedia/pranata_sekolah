@@ -72,8 +72,7 @@
     const BASE_URL = '<?=base_url()?>';
 
     let currentStudent = localStorage.getItem("student-classlist-url");
-    console.log(currentStudent);
-    if(currentStudent.length > 0) {
+    if(currentStudent && currentStudent.length > 0) {
         loadContent(currentStudent, ".student-area");
     }
 
