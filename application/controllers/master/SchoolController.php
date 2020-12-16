@@ -135,4 +135,11 @@ class SchoolController extends CI_Controller
             ]);
         }
     }
+
+    public function delete($id)
+    {
+        $this->BM->deleteById("agenda", $id);
+        appJson($id);
+    }
+    
 }

@@ -21,6 +21,7 @@
 </li>
 <?php } ?>
 
+<?php if ($this->auth->role == 'admin' || $this->auth->role == 'teacher') { ?>
 <li class="xn-openable master">
     <a><span class="fa fa-hdd-o"></span> <span class="xn-text">Master Data</span></a>
     <ul>
@@ -34,10 +35,13 @@
                 <li class="teachers"><a class="side-submenu" data-url="<?=base_url("admin/teachers")?>" data-menu=".master"
                         data-submenu=".teachers"><span class="fa fa-circle"></span> Guru</a></li>
         <?php } ?>
+       
         <li class="students"><a class="side-submenu" data-url="<?=base_url("admin/students")?>" data-menu=".master"
                 data-submenu=".students"><span class="fa fa-circle"></span> Murid</a></li>
+       
     </ul>
 </li>
+<?php } ?>
 
 <?php if($this->auth->role == "admin") { ?>
 <li class="xn-openable relation">
@@ -51,10 +55,19 @@
 </li>
 <?php } ?>
 
+<?php if ($this->auth->role == 'admin' || $this->auth->role == 'teacher') { ?>
 <li class="value">
     <a class="side-menu" data-url="<?=base_url("admin/values")?>" data-menu=".value"><span
             class="fa fa-book"></span> <span class="xn-text">Nilai Siswa</span></a>
 </li>
+<?php } ?>
+
+<?php if($this->auth->role == 'student') { ?>
+<li class="student-value">
+    <a class="side-menu" data-url="<?=base_url("admin/student-value")?>" data-menu=".student-value"><span
+        class="fa fa-book"></span> <span class="xn-text">Nilai Saya</span></a>
+</li>   
+<?php } ?>
 
 <?php if($this->auth->role == "admin") { ?>
 <li class="xn-openable manage_school">

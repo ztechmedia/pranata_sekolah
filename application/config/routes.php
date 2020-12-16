@@ -7,6 +7,10 @@ $route['translate_uri_dashes'] = false;
 
 //web routes
 $route['home'] = 'web/WebController/home';
+$route['vimission'] = 'web/WebController/vimission';
+$route['history'] = 'web/WebController/history';
+$route['agenda'] = 'web/WebController/agenda';
+$route['agenda/(:num)/read'] = 'web/WebController/readAgenda/$1';
 
 //school management
 $route['admin/vimission'] = 'master/SchoolController/vimission';
@@ -18,8 +22,12 @@ $route['admin/agenda/(:num)/edit'] = 'master/SchoolController/edit/$1';
 $route['admin/agenda/(:num)/update'] = 'master/SchoolController/update/$1';
 $route['admin/agenda/tinyupload'] = 'master/SchoolController/tinyUpload';
 $route['admin/agenda/add'] = 'master/SchoolController/add';
+$route['admin/agenda/(:num)/delete'] = 'master/SchoolController/delete/$1';
 $route['admin/history'] = 'master/SchoolController/history';
 $route['admin/history/update'] = 'master/SchoolController/historyUpdate';
+
+//student-values
+$route['admin/student-value'] = 'relation/SubjectValue/studentValue';
 
 //admin routes
 $route['admin'] = 'AppController';

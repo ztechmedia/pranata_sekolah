@@ -1,7 +1,10 @@
 <div class="page-title">
 	<h2><span class="fa fa-arrow-circle-o-left link-to" 
 		data-target=".student-area" 
-		data-to="<?=base_url("admin/values/$student->id/classlist")?>"></span></h2>
+		data-to="<?=
+			$this->auth->role == "student" 
+				? base_url("admin/values/$student->id/classlist")
+				: base_url("admin/student-value"); ?>"></span></h2>
 </div>
 
 <div class="row" style="margin-bottom: 10px">
@@ -30,7 +33,7 @@
 					<tr>
 						<td>Tahun Pelajaran</td>
 						<td>
-							<select onchange="getSubclass()" class="form-control" name="year" id="year">
+							<select style="color: #000; <?=$this->auth->role ? 'display:none;' : null?>" onchange="getSubclass()" class="form-control" name="year" id="year">
 								<?php 
 									for ($i=2008;$i<=2099;$i++) {
 										$selected = $i == $year ? "selected" : null;
@@ -38,6 +41,7 @@
 									}
 								?>
 							</select>
+							<?= $this->auth->role == 'student' ? $year : null ?>
 						</td>
 					</tr>
 				</tbody>

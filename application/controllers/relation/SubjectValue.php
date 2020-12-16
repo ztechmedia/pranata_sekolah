@@ -72,7 +72,7 @@ class SubjectValue extends CI_Controller
             $newSub[$sname][] = [
                 "id" => $sub->id,
                 "subject_name" => $sub->subject_name,
-                "status" => $status,
+                "status" => $this->auth->role == 'student' ? false : $status,
                 "task" => isset($sub->task) ? $sub->task : 0,
                 "midtest" => isset($sub->midtest) ? $sub->midtest : 0,
                 'endtest' => isset($sub->endtest) ? $sub->endtest : 0
@@ -138,5 +138,13 @@ class SubjectValue extends CI_Controller
                 "message" => "Reset nilai berhasil"
             ]);
         }
+    }
+
+    public function studentValue()
+    {
+        $studentId = $this->BM->getWhere("students", ["user_id" => $this->auth->userId])->row()->id;
+        $data['student'] = $this->Value->getStudent($studentId);
+        $data['classes'] = $this->BM->getAll("class");
+        $this->load->view("admin/student-value/student-value", $data);
     }
 }

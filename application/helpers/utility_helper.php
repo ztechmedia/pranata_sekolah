@@ -88,6 +88,17 @@ function toDateTime($date)
     return date_format($date, "d/m/Y H:i:s");
 }
 
+
+function max_length($string, $max) {
+    $stringLength = strlen($string);
+    $result = substr($string, 0, $max);
+    if($stringLength > $max) {
+        return $result."...";
+    }else{
+        return $string;
+    }
+}
+
 function mToMonth($m)
 {
     $month = [

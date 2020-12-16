@@ -25,7 +25,7 @@ class AppController extends CI_Controller {
         $this->session->unset_userdata(SESSION_KEY);
         appJson([
             "success" => true,
-            "redirect" => base_url("login"),
+            "redirect" => base_url("home"),
         ]);
     }
 }

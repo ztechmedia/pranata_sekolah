@@ -29,27 +29,46 @@
                 </tr>
                 <?php foreach($sub as $list) { ?>
                     <input style="display: none" name="subclass_id[]" value="<?=$list['id']?>">
-                    <tr>
-                        <td>
-                            <?=$list['subject_name']?>
-                        </td>
-                        <td>
-                            <input <?=$list["status"] ? 'readonly' : null ?> value="<?=$list['task']?>" type="number" class="form-control" name="task[<?=$list['id']?>][]">
-                        </td>
-                        <td>
-                            <input <?=$list["status"] ? 'readonly' : null ?> value="<?=$list['midtest']?>" type="number" class="form-control" name="midtest[<?=$list['id']?>][]">
-                        </td>
-                        <td>
-                            <input <?=$list["status"] ? 'readonly' : null ?> value="<?=$list['endtest']?>" type="number" class="form-control" name="endtest[<?=$list['id']?>][]">
-                        </td>
-                    </tr>
+                    <?php if($this->auth->role == "student") { ?>
+                        <tr>
+                            <td>
+                                <?=$list['subject_name']?>
+                            </td>
+                            <td>
+                                <?=$list['task']?>
+                            </td>
+                            <td>
+                                <?=$list['midtest']?>
+                            </td>
+                            <td>
+                                <?=$list['endtest']?>
+                            </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td>
+                                <?=$list['subject_name']?>
+                            </td>
+                            <td>
+                                <input <?=$list["status"] ? 'readonly' : null ?> value="<?=$list['task']?>" type="number" class="form-control" name="task[<?=$list['id']?>][]">
+                            </td>
+                            <td>
+                                <input <?=$list["status"] ? 'readonly' : null ?> value="<?=$list['midtest']?>" type="number" class="form-control" name="midtest[<?=$list['id']?>][]">
+                            </td>
+                            <td>
+                                <input <?=$list["status"] ? 'readonly' : null ?> value="<?=$list['endtest']?>" type="number" class="form-control" name="endtest[<?=$list['id']?>][]">
+                            </td>
+                        </tr>
+                    <?php } ?>
                 <?php } ?>
             <?php } ?>
         </tbody>
     </table>
 
     <div class="btn-container">
-        <button type="submit" id="save" class="btn btn-primary"><?=$action == "add" ? "Simpan" : "Update" ?></button>
+        <?php if($this->auth->role == "admin" && $this->auth->role == "teacher") {?>
+            <button type="submit" id="save" class="btn btn-primary"><?=$action == "add" ? "Simpan" : "Update" ?></button>
+        <?php } ?>
         <?php if($action == "update" && $this->auth->role == "admin") {?>
             <button type="button" id="delete" class="btn btn-danger">Reset</button>
         <?php } ?>
