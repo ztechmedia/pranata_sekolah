@@ -66,7 +66,7 @@
     </table>
 
     <div class="btn-container">
-        <?php if($this->auth->role == "admin" && $this->auth->role == "teacher") {?>
+        <?php if($this->auth->role == "admin" || $this->auth->role == "teacher") {?>
             <button type="submit" id="save" class="btn btn-primary"><?=$action == "add" ? "Simpan" : "Update" ?></button>
         <?php } ?>
         <?php if($action == "update" && $this->auth->role == "admin") {?>
