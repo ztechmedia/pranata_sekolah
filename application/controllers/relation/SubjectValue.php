@@ -29,6 +29,7 @@ class SubjectValue extends CI_Controller
 
     public function studentClasslist($studentId)
     {
+        $this->BM->checkById("students", $studentId);
         $data['student'] = $this->Value->getStudent($studentId);
         $data['classes'] = $this->BM->getAll("class");
         $this->load->view("admin/values/student-classlist", $data);

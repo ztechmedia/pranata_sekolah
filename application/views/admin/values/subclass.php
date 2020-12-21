@@ -12,8 +12,8 @@
                 <th>Semester</th>
                 <th>Mata Pelajaran</th>
                 <th width="12%">Nilai Tugas</th>
+                <th width="12%">Nilai Harian</th>
                 <th width="12%">Nilai UTS</th>
-                <th width="12%">Nilai UAS</th>
             </tr>
         </thead>
 
