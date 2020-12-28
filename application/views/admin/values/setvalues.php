@@ -1,10 +1,7 @@
 <div class="page-title">
-	<h2><span class="fa fa-arrow-circle-o-left link-to" 
+	<h2><span class="fa fa-arrow-circle-o-left link-to-unsave" 
 		data-target=".student-area" 
-		data-to="<?=
-			$this->auth->role == "student" 
-				? base_url("admin/values/$student->id/classlist")
-				: base_url("admin/student-value"); ?>"></span></h2>
+		data-to="<?= base_url("admin/values/$student->id/classlist") ?>"></span></h2>
 </div>
 
 <div class="row" style="margin-bottom: 10px">

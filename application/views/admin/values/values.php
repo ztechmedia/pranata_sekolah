@@ -1,12 +1,12 @@
 <ul class="breadcrumb">
-    <li class="active">Nilai Siswa</li>
+    <li class="active">Input Nilai</li>
 </ul>
 
 <div class="content-frame">
     <div class="content-frame-top">
         <div class="page-title">
             <h2><span class="fa fa-book"></span>
-                Nilai Siswa
+                Input Nilai
             </h2>
         </div>
     </div>
@@ -73,7 +73,9 @@
 
     let currentStudent = localStorage.getItem("student-classlist-url");
     if(currentStudent && currentStudent.length > 0) {
-        loadContent(currentStudent, ".student-area");
+        setTimeout(() => {
+            loadContent(currentStudent, ".student-area");
+        }, 500)
     }
 
     function searchStudent(student) {

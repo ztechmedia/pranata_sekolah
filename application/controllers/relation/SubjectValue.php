@@ -20,6 +20,28 @@ class SubjectValue extends CI_Controller
         $this->load->view('admin/values/values');
     }
 
+    public function classValues($year)
+    {
+        $data['classes'] = $this->BM->getALl("class");
+        $data['year'] = $year;
+        $this->load->view('admin/values/class/class-values', $data);
+    }
+
+    public function classValuesList($classId, $year)
+    {
+        $data['students'] = $this->Subject->classValuesStudentList($classId, $year);
+        $data['class'] = $this->BM->getById("class", $classId);
+        $data['year'] = $year;
+        $this->load->view('admin/values/class/student-list', $data);
+    }
+
+    public function studentListValues($classId, $year, $studentId)
+    {
+        $data['student'] = $this->Value->subclassListExist($classId, $year, $studentId);
+        dd($data['student']);
+        $this->load->view('admin/values/class/student-list-values', $data);
+    }
+
     public function studentSearch()
     {
        $obj = fileGetContent();

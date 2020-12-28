@@ -143,6 +143,9 @@ $route['admin/subteachers/add'] = 'relation/SubjectTeacher/add/$1';
 /* values routes */
 //@view
 $route['admin/values'] = 'relation/SubjectValue/values';
+$route['admin/values/class-values/(:num)'] = 'relation/SubjectValue/classValues/$1';
+$route['admin/values/class-values/(:num)/(:num)/list'] = 'relation/SubjectValue/classValuesList/$1/$2';
+$route['admin/values/class-values/(:num)/(:num)/(:num)/list-values'] = 'relation/SubjectValue/studentListValues/$1/$2/$3';
 //@action
 $route['admin/values/student-search'] = 'relation/SubjectValue/studentSearch';
 $route['admin/values/(:num)/classlist'] = 'relation/SubjectValue/studentClasslist/$1';

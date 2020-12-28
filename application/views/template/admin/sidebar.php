@@ -56,9 +56,14 @@
 <?php } ?>
 
 <?php if ($this->auth->role == 'admin' || $this->auth->role == 'teacher') { ?>
-<li class="value">
-    <a class="side-menu" data-url="<?=base_url("admin/values")?>" data-menu=".value"><span
-            class="fa fa-book"></span> <span class="xn-text">Nilai Siswa</span></a>
+<li class="xn-openable values">
+    <a><span class="fa fa-book"></span> <span class="xn-text">Nilai</span></a>
+    <ul>
+        <li class="value""><a class="side-submenu" data-url="<?=base_url("admin/values")?>" data-menu=".values"
+                data-submenu=".value""><span class="fa fa-circle"></span> Input Nilai</a></li>
+        <li class="class-value""><a class="side-submenu" data-url="<?=base_url("admin/values/class-values/$currentYear")?>" data-menu=".values"
+                data-submenu=".class-value""><span class="fa fa-circle"></span> Nilai Siswa</a></li>
+    </ul>
 </li>
 <?php } ?>
 
@@ -86,7 +91,7 @@
 
 <?php if($this->auth->role == "admin") {?>
 <li class="xn-openable settings">
-    <a><span class="fa fa-gear"></span> <span class="xn-text">Pengaturan</span></a>
+    <a><span class="fa fa-gear"></span> <span class="xn-text">Hak Akses</span></a>
     <ul>
         <li class="roles"><a class="side-submenu" data-url="<?=base_url("admin/roles")?>" data-menu=".settings"
                 data-submenu=".roles"><span class="fa fa-lock"></span> Roles</a></li>

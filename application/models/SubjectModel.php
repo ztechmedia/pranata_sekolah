@@ -50,4 +50,18 @@ class SubjectModel extends CI_Model
                 ->get()
                 ->result();
     }
+
+    public function classValuesStudentList($classId, $year)
+    {
+        return $this->db
+                ->select("a.class_id, b.student_id, c.name")
+                ->from("subclass AS a")
+                ->join("student_values AS b", "a.id = b.subclass_id")
+                ->join("students AS c", "c.id = b.student_id")
+                ->where("a.class_id", $classId)
+                ->where("a.year", $year)
+                ->group_by("b.student_id")
+                ->get()
+                ->result();
+    }
 }

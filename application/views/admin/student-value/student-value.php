@@ -48,7 +48,7 @@
 
                     </div>
                 </div>
-                <div class="row">s
+                <div class="row">
                     <?php foreach ($classes as $class) { ?>
                         <div class="col-md-3">
                             <a class="tile tile-default link-to-unsave"
