@@ -1,4 +1,4 @@
-const formValidation = (className, myDropzone = null, redirect = null) => {
+const formValidation = (className, redirect = null, target = null) => {
   if ($("form[id^='validate']").length > 0) {
     // Validation prefix for custom form elements
     var prefix = "valPref_";
@@ -18,8 +18,12 @@ const formValidation = (className, myDropzone = null, redirect = null) => {
       onValidationComplete: function (form, status) {
         if (status) {
           submitHandler(className);
-          if (myDropzone) {
-            loadContent(redirect, ".content");
+          if (redirect) {
+            if (target) {
+              loadContent(redirect, target);
+            } else {
+              loadContent(redirect, ".content");
+            }
           }
         }
       },

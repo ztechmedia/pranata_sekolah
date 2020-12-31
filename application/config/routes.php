@@ -154,3 +154,12 @@ $route['admin/values/(:num)/(:num)/(:num)/subclass'] = 'relation/SubjectValue/su
 $route['admin/values/(:num)/add'] = 'relation/SubjectValue/add/$1';
 $route['admin/values/(:num)/update'] = 'relation/SubjectValue/update/$1';
 $route['admin/values/delete'] = 'relation/SubjectValue/delete';
+
+/* values routes */
+//@view
+$route['admin/schedule/(:num)'] = 'master/ScheduleController/schedule/$1';
+$route['admin/schedule/(:num)/(:num)/edit'] = 'master/ScheduleController/editSchedule/$1/$2';
+$route['admin/schedule/(:num)/(:num)/(:num)/sm-subclass'] = 'master/ScheduleController/smSubclass/$1/$2/$3';
+$route['admin/schedule/add'] = 'master/ScheduleController/add';
+$route['admin/schedule/(:num)/(:num)/list'] = 'master/ScheduleController/scheduleList/$1/$2';
+$route['admin/schedule/(:num)/delete'] = 'master/ScheduleController/delete/$1';

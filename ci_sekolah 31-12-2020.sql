@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2020 at 10:37 AM
+-- Generation Time: Dec 31, 2020 at 01:11 AM
 -- Server version: 8.0.22
 -- PHP Version: 7.4.12
 
@@ -42,8 +42,7 @@ CREATE TABLE `agenda` (
 --
 
 INSERT INTO `agenda` (`id`, `title`, `slug`, `description`, `date`, `user_id`, `created_at`) VALUES
-(2, 'Pengambilan Rapot', 'pengambilan-rapot', '<p>asdasd</p>\r\n<p><img src=\"http://localhost/ci/sekolah/assets/images/agenda/post-image-1607851088750.png\" alt=\"\" width=\"512\" height=\"200\" /></p>', '2020-12-13', 1, '2020-12-13 09:18:12'),
-(3, 'asdasd', 'asdasd', '<p>asdasd Kuprettt</p>\r\n<p><img src=\"http://localhost/ci/sekolah/assets/images/agenda/post-image-1607855804010.jpg\" alt=\"\" width=\"2592\" height=\"1944\" /></p>', '2020-12-13', 1, '2020-12-13 10:30:53');
+(2, 'Penyuluhan Bahasa Virus Corona', 'penyuluhan-bahasa-virus-corona', '<p><img src=\"https://rs-soewandhi.surabaya.go.id/wp-content/uploads/2020/02/Berita-36.jpg\" alt=\"\" width=\"550\" height=\"367\" /></p>\r\n<p>&nbsp;</p>\r\n<p>Hari ini (7/2), tim PKRS dan PPI RSUD dr. Mohamad Soewandhie memberikan penyuluhan mengenai bahaya serta cara mengantisipasi Virus Corona yang marak di masyarakat kepada para pengunjung Rumah Sakit.</p>\r\n<p>Virus yang dikenal dengan nama Novel Coronavirus ini memiliki gejala yang serupa dengan penyakit flu pada umumnya, sehingga dapat dengan mudah menyebar ke orang lain. Untuk mengatasi hal tersebut, maka yang bisa dilakukan adalah menjaga diri dengan melakukan tiga hal mendasar, yaitu cara menggunakan masker yang benar, melakukan cuci tangan dengan benar sesuai 6 langkah 5 momen, serta menerapkan etika batuk.</p>\r\n<p>Tim PKRS dan PPI RSUD dr. Mohamad Soewandhie akan terus melakukan penyuluhan setiap harinya agar para pengunjung RSUD dr. Mohamad Soewandhie menjadi lebih peduli dengan kesehatan.</p>\r\n<p>Terus jaga kesehatan ya sahabat sehat.</p>', '2020-12-13', 1, '2020-12-13 09:18:12');
 
 -- --------------------------------------------------------
 
@@ -114,6 +113,38 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `id` int NOT NULL,
+  `subclass_id` int NOT NULL,
+  `start_time` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `end_time` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `day` tinyint(1) NOT NULL,
+  `created-at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `subclass_id`, `start_time`, `end_time`, `day`, `created-at`) VALUES
+(2, 137, '07:00', '07:00', 1, '2020-12-30 15:58:42'),
+(3, 149, '07:00', '07:00', 2, '2020-12-30 23:20:51'),
+(4, 150, '07:00', '07:00', 3, '2020-12-30 23:44:25'),
+(5, 151, '07:00', '07:00', 3, '2020-12-30 23:44:55'),
+(6, 138, '07:00', '07:00', 2, '2020-12-31 00:04:10'),
+(7, 138, '07:00', '07:00', 3, '2020-12-31 00:05:50'),
+(8, 149, '07:00', '07:00', 1, '2020-12-31 00:27:53'),
+(9, 148, '07:00', '09:00', 4, '2020-12-31 00:35:08'),
+(10, 149, '07:00', '12:00', 4, '2020-12-31 00:37:01'),
+(11, 137, '10:30', '13:30', 4, '2020-12-31 00:37:24'),
+(12, 150, '07:00', '07:00', 5, '2020-12-31 00:38:03');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `semesters`
 --
 
@@ -159,8 +190,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `nis`, `name`, `birth_place`, `birth_date`, `gender`, `address`, `phone`, `email`, `major`, `class_id`, `semester_id`, `user_id`, `created_at`) VALUES
-(7, 123, 'Arman Septian', 'Bekasi', '1999-01-01', 'Laki - Laki', 'Babakan', '0895-1722-7009', 'arman@gmail.com', '', 1, 2, 12, '2020-12-01 17:26:06'),
-(8, 123123, '123', '123', '1999-01-01', 'Laki - Laki', '123', '1231-2312-3123', '123123@gmail.com', '123123', 1, 2, 14, '2020-12-01 18:00:16');
+(9, 123, 'Arman', 'Bekasi', '1999-01-01', 'Laki - Laki', 'Bekasi', '0895-1722-7009', 'arman@gmail.com', '', 1, 2, 16, '2020-12-21 17:33:15');
 
 -- --------------------------------------------------------
 
@@ -183,20 +213,12 @@ CREATE TABLE `student_values` (
 --
 
 INSERT INTO `student_values` (`id`, `student_id`, `subclass_id`, `task`, `midtest`, `endtest`, `created_at`) VALUES
-(24, 8, 142, 0, 0, 0, '2020-12-08 12:31:00'),
-(25, 8, 143, 90, 90, 90, '2020-12-08 12:31:00'),
-(26, 8, 145, 90, 90, 90, '2020-12-08 12:31:00'),
-(27, 8, 146, 90, 90, 90, '2020-12-08 12:31:00'),
-(28, 8, 147, 90, 90, 90, '2020-12-08 12:31:00'),
-(29, 8, 152, 90, 90, 90, '2020-12-08 12:31:00'),
-(30, 8, 140, 90, 90, 90, '2020-12-08 12:31:00'),
-(31, 8, 141, 90, 90, 90, '2020-12-08 12:31:00'),
-(32, 8, 148, 0, 0, 0, '2020-12-08 12:34:49'),
-(33, 8, 149, 0, 0, 0, '2020-12-08 12:34:49'),
-(34, 8, 150, 0, 0, 0, '2020-12-08 12:34:49'),
-(35, 8, 151, 0, 0, 0, '2020-12-08 12:34:49'),
-(36, 8, 137, 0, 0, 0, '2020-12-08 12:34:49'),
-(37, 8, 138, 0, 0, 0, '2020-12-08 12:34:49');
+(44, 9, 148, 70, 90, 90, '2020-12-21 17:34:23'),
+(45, 9, 149, 90, 90, 90, '2020-12-21 17:34:23'),
+(46, 9, 150, 90, 90, 90, '2020-12-21 17:34:23'),
+(47, 9, 151, 90, 90, 90, '2020-12-21 17:34:23'),
+(48, 9, 137, 90, 90, 90, '2020-12-21 17:34:23'),
+(49, 9, 138, 90, 90, 90, '2020-12-21 17:34:23');
 
 -- --------------------------------------------------------
 
@@ -279,20 +301,12 @@ CREATE TABLE `subteachers` (
 --
 
 INSERT INTO `subteachers` (`id`, `subclass_id`, `teacher_id`, `created_at`) VALUES
-(34, 137, 5, '2020-12-06 14:41:26'),
-(35, 138, 6, '2020-12-06 14:43:08'),
-(36, 142, 6, '2020-12-08 11:46:32'),
-(37, 148, 6, '2020-12-08 12:14:36'),
-(38, 149, 6, '2020-12-08 12:14:38'),
-(39, 150, 6, '2020-12-08 12:14:40'),
-(40, 151, 6, '2020-12-08 12:14:43'),
-(41, 143, 5, '2020-12-08 12:15:01'),
-(42, 145, 5, '2020-12-08 12:15:04'),
-(43, 146, 5, '2020-12-08 12:15:06'),
-(44, 147, 5, '2020-12-08 12:15:08'),
-(45, 152, 5, '2020-12-08 12:15:11'),
-(46, 140, 5, '2020-12-08 12:15:13'),
-(47, 141, 5, '2020-12-08 12:15:16');
+(48, 148, 9, '2020-12-21 17:33:42'),
+(49, 149, 9, '2020-12-21 17:33:45'),
+(50, 150, 9, '2020-12-21 17:33:48'),
+(51, 151, 9, '2020-12-21 17:33:51'),
+(52, 137, 9, '2020-12-21 17:33:55'),
+(53, 138, 9, '2020-12-21 17:33:58');
 
 -- --------------------------------------------------------
 
@@ -323,9 +337,7 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `nip`, `name`, `birth_place`, `birth_date`, `gender`, `address`, `phone`, `email`, `education`, `major`, `status`, `work_status`, `user_id`, `created_at`) VALUES
-(5, '123', 'Andri S.Kom', 'Bekasi', '1999-01-01', 'Laki - Laki', 'Bekasi', '0895-1722-7009', 'andri@gmail.com', 'S1', 'Teknik Informatika', 'Lajang', 'PNS', 9, '2020-11-29 19:10:36'),
-(6, '1234', 'Ariel S.Pdi', 'Bekasi', '1999-01-01', 'Laki - Laki', 'Bekasi', '0895-1722-7008', 'ariel@gmail.com', 'S1', 'Teknik Informatika', 'Lajang', 'PNS', 10, '2020-11-30 00:25:05'),
-(8, '123123', '123', '123', '1999-01-01', 'Laki - Laki', '123', '1231-2312-3123', '123@gmail.com', 'S1', '123', 'Lajang', 'PNS', 13, '2020-12-01 17:59:58');
+(9, '123', 'Arman', 'Bekasi', '1999-01-01', 'Laki - Laki', 'Bekasi', '0895-1722-7009', 'septian.arman009@gmail.com', 'S1', 'Teknik Informatika', 'Lajang', 'PNS', 15, '2020-12-21 17:32:42');
 
 -- --------------------------------------------------------
 
@@ -351,11 +363,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `token`, `token_password`, `is_verified`, `created_at`) VALUES
 (1, 'Admin', 'admin@gmail.com', '$2y$10$spDBjwixY6YbiJ2SZOXZKuXjURsZx8l4a/kDhS0y9uJgCymtRhTei', 1, '', '', 1, '2020-11-16 06:14:13'),
-(9, 'Andri S.Kom', 'andri@gmail.com', '$2y$10$avzfpnnS/jdJsnBpZfkULO0PQKoYUCr94MOyK0VygColc5vCcXRGa', 2, '', '', 1, '2020-11-29 19:10:36'),
-(10, 'Ariel S.Pdi', 'ariel@gmail.com', '$2y$10$nNnikPVq.gc7i41PUfgrBuxm.4FtpM3ptvXaEY9KTigvhnZBoz9f.', 2, '', '', 1, '2020-11-30 00:25:05'),
-(12, 'Arman Septian', 'arman@gmail.com', '$2y$10$uHH7Z6VkIYz2Karg/0IXIeCllHGxbeXowlqFndANz7ga14IH10p0q', 3, '', '', 1, '2020-12-01 17:26:06'),
-(13, '123', '123@gmail.com', '$2y$10$lAFL4JtzMXrWnXJvR6iJkOShpn4pMB1.3tOZqTOI4YDXa9u2h.NvC', 2, '', '', 1, '2020-12-01 17:59:58'),
-(14, '123', '123123@gmail.com', '$2y$10$5nlRgq765N9z0cdnUrKenO5l8G5lEuMveIU2BcsUuLM.hGNXfFfbu', 3, '', '', 1, '2020-12-01 18:00:16');
+(15, 'Arman', 'septian.arman009@gmail.com', '$2y$10$yAHa8DMfq35/TVGF.2ni.emRgspnsCDw9dh1rUEx0.d9SE/8U9cgC', 2, '', '', 1, '2020-12-21 17:32:42'),
+(16, 'Arman', 'arman@gmail.com', '$2y$10$QhSr2w4D4SlKVIwXOKsjx.p0LycV2U5OfV7Yh6h1PaqRA9ABR20Om', 3, '', '', 1, '2020-12-21 17:33:15');
 
 -- --------------------------------------------------------
 
@@ -375,7 +384,7 @@ CREATE TABLE `vision_mission` (
 --
 
 INSERT INTO `vision_mission` (`id`, `vision`, `mission`, `created_at`) VALUES
-(1, 'VisiX', 'X', '2020-12-12 08:13:02');
+(1, 'Terwujudnya Generasi Yang Berkualitas Dan Berkarakter', '- Menanamkan Keyakinan Akidah melalui Pengalaman Ajaran Agama <br><br>\r\n- Mengoptimalkan Proses Pembelajaran dan Bimbingan melalui PAKEM (Pembelajaran Aktif Inovatif Kreatif Efektif dan Menyenangkan) <br><br>\r\n- Mengembangkan Pengetahuan di Bidan IPTEK, Bahasa, Olahraga dan Seni Budaya sesuai dengan Bakat, Minat dan Potensi Siswa <br><br>\r\n- Menjalin Kerjasama yang Harmonis antara Warga Sekolah dan Lingkungan <br><br>\r\n- Meningkatkan Mutu Pendidikan dalam upaya Mencerdaskan Kehidupan Generasi yang Bermoral, Kreatif, Maju dan Mandiri', '2020-12-12 08:13:02');
 
 --
 -- Indexes for dumped tables
@@ -403,6 +412,12 @@ ALTER TABLE `history`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `schedules`
+--
+ALTER TABLE `schedules`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -500,6 +515,12 @@ ALTER TABLE `roles`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `semesters`
 --
 ALTER TABLE `semesters`
@@ -509,13 +530,13 @@ ALTER TABLE `semesters`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `student_values`
 --
 ALTER TABLE `student_values`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `subclass`
@@ -533,19 +554,19 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `subteachers`
 --
 ALTER TABLE `subteachers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `vision_mission`

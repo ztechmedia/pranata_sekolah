@@ -123,3 +123,16 @@ function revDate($date) {
     $date = explode("-", $date);
     return "$date[2]-$date[1]-$date[0]";
 }
+function dayName($number)
+{
+    $days = [
+        "1" => "Senin",
+        "2" => "Selasa",
+        "3" => "Rabu",
+        "4" => "Kamis",
+        "5" => "Jumat",
+        "6" => "Sabtu",
+    ];
+    
+    return $days[$number];
+}

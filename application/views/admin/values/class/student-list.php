@@ -23,7 +23,7 @@
                         <span class="list-group-item link-to-unsave" 
                             data-target=".value-area"
                             data-to="<?=base_url("admin/values/class-values/$student->class_id/$year/$student->student_id/list-values")?>" 
-                            style="font-weight:bold; font-size:14px; cursor:pointer;">
+                            style="font-size:14px; cursor:pointer;">
                              <?=$no++. '. ' . $student->name?>
                         </span>
                     <?php } ?>
@@ -36,7 +36,7 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">Daftar Nilai</h3>
 				</div>
-				<div class="panel-body custom-scroll">
+				<div class="panel-body custom-scroll" style="padding: 0px;">
                     <div class="value-area"></div>
 				</div>
 			</div>

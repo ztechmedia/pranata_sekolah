@@ -55,6 +55,11 @@
 </li>
 <?php } ?>
 
+<li class="schedule">
+    <a class="side-menu" data-url="<?=base_url("admin/schedule/$currentYear")?>" data-menu=".schedule"><span
+            class="fa fa-calendar"></span> <span class="xn-text">Jadwal Pelajaran</span></a>
+</li>
+
 <?php if ($this->auth->role == 'admin' || $this->auth->role == 'teacher') { ?>
 <li class="xn-openable values">
     <a><span class="fa fa-book"></span> <span class="xn-text">Nilai</span></a>

@@ -37,8 +37,21 @@ class SubjectValue extends CI_Controller
 
     public function studentListValues($classId, $year, $studentId)
     {
-        $data['student'] = $this->Value->subclassListExist($classId, $year, $studentId);
-        dd($data['student']);
+        $sublist = $this->Value->subclassListExist($classId, $year, $studentId);
+        $newSub = [];
+        $subclassId = [];
+        foreach ($sublist as $sub) {
+            $sname = $sub->semester_name;
+            $newSub[$sname][] = [
+                "id" => $sub->id,
+                "subject_name" => $sub->subject_name,
+                "task" => isset($sub->task) ? $sub->task : 0,
+                "midtest" => isset($sub->midtest) ? $sub->midtest : 0,
+                'endtest' => isset($sub->endtest) ? $sub->endtest : 0
+            ];
+        }
+        $data['sublist'] = $newSub;
+        $data['student'] = $this->BM->getById("students", $studentId);
         $this->load->view('admin/values/class/student-list-values', $data);
     }
 
